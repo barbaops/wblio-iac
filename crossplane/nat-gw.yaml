@@ -1,0 +1,32 @@
+apiVersion: ec2.aws.crossplane.io/v1beta1
+kind: EIP
+metadata:
+  name: nat-eip-1
+spec:
+  forProvider:
+    tags:
+      - key: Environment
+        value: dev
+      - key: Name
+        value: nat-eip-1
+  providerConfigRef:
+    name: aws-provider
+---
+apiVersion: ec2.aws.crossplane.io/v1beta1
+kind: NATGateway
+metadata:
+  name: nat-gateway-1
+spec:
+  forProvider:
+    allocationIdSelector:
+      matchControllerRef: true
+    subnetIdSelector:
+      matchLabels:
+        Name: public-subnet-1
+    tags:
+      - key: Environment
+        value: dev
+      - key: Name
+        value: nat-gateway-1
+  providerConfigRef:
+    name: aws-provider

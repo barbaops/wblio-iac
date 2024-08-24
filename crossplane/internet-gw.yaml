@@ -1,0 +1,15 @@
+apiVersion: ec2.aws.crossplane.io/v1beta1
+kind: InternetGateway
+metadata:
+  name: main-igw
+spec:
+  forProvider:
+    vpcIdSelector:
+      matchControllerRef: true
+    tags:
+      - key: Environment
+        value: dev
+      - key: Name
+        value: main-igw
+  providerConfigRef:
+    name: aws-provider

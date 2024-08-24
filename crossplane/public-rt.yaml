@@ -1,0 +1,61 @@
+apiVersion: ec2.aws.crossplane.io/v1beta1
+kind: RouteTable
+metadata:
+  name: public-route-table
+spec:
+  forProvider:
+    vpcIdSelector:
+      matchControllerRef: true
+    routes:
+      - cidrBlock: "0.0.0.0/0"
+        gatewayIdSelector:
+          matchControllerRef: true
+    tags:
+      - key: Environment
+        value: dev
+      - key: Name
+        value: public-route-table
+  providerConfigRef:
+    name: aws-provider
+---
+apiVersion: ec2.aws.crossplane.io/v1beta1
+kind: RouteTableAssociation
+metadata:
+  name: public-subnet-1a-rta
+spec:
+  forProvider:
+    subnetIdSelector:
+      matchLabels:
+        Name: public-subnet-1a
+    routeTableIdSelector:
+      matchControllerRef: true
+  providerConfigRef:
+    name: aws-provider
+---
+apiVersion: ec2.aws.crossplane.io/v1beta1
+kind: RouteTableAssociation
+metadata:
+  name: public-subnet-1b-rta
+spec:
+  forProvider:
+    subnetIdSelector:
+      matchLabels:
+        Name: public-subnet-1b
+    routeTableIdSelector:
+      matchControllerRef: true
+  providerConfigRef:
+    name: aws-provider
+---
+apiVersion: ec2.aws.crossplane.io/v1beta1
+kind: RouteTableAssociation
+metadata:
+  name: public-subnet-1c-rta
+spec:
+  forProvider:
+    subnetIdSelector:
+      matchLabels:
+        Name: public-subnet-1c
+    routeTableIdSelector:
+      matchControllerRef: true
+  providerConfigRef:
+    name: aws-provider

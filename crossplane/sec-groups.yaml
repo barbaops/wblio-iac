@@ -1,0 +1,25 @@
+apiVersion: ec2.aws.crossplane.io/v1beta1
+kind: SecurityGroup
+metadata:
+  name: allow-all-sg
+spec:
+  forProvider:
+    vpcIdSelector:
+      matchControllerRef: true
+    ingress:
+      - fromPort: 0
+        toPort: 0
+        protocol: "-1"
+        cidrBlocks: ["0.0.0.0/0"]
+    egress:
+      - fromPort: 0
+        toPort: 0
+        protocol: "-1"
+        cidrBlocks: ["0.0.0.0/0"]
+    tags:
+      - key: Environment
+        value: dev
+      - key: Name
+        value: allow-all-sg
+  providerConfigRef:
+    name: aws-provider
