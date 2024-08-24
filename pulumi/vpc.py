@@ -44,6 +44,17 @@ for i, cidr in enumerate(private_subnets):
     )
     private_subnets_resources.append(subnet)
 
+databases_subnets_resources = []
+for i, cidr in enumerate(databases_subnets):
+    subnet = aws.ec2.Subnet(
+        f"databases-subnet-{i+1}",
+        vpc_id=vpc.id,
+        cidr_block=cidr,
+        availability_zone=availability_zones[i],
+        tags={**tags, "Name": f"{project_name}-databases-subnet-{i+1}"}
+    )
+    databases_subnets_resources.append(subnet)
+    
 public_route_table = aws.ec2.RouteTable(
     "public-route-table",
     vpc_id=vpc.id,
