@@ -1,0 +1,56 @@
+apiVersion: ec2.aws.crossplane.io/v1beta1
+kind: Subnet
+metadata:
+  name: database-subnet-1a
+spec:
+  forProvider:
+    vpcId: main-vpc
+    cidrBlock: "10.0.51.0/24"
+    availabilityZone: "us-east-1a"
+  providerConfigRef:
+    name: default
+  tags:
+    - key: Name
+      value: "database-subnet-1a"
+    - key: Project
+      value: "wblio-lab"
+    - key: Region
+      value: "us-east-1"
+---
+apiVersion: ec2.aws.crossplane.io/v1beta1
+kind: Subnet
+metadata:
+  name: database-subnet-1b
+spec:
+  forProvider:
+    vpcId: main-vpc
+    cidrBlock: "10.0.52.0/24"
+    availabilityZone: "us-east-1b"
+  providerConfigRef:
+    name: default
+  tags:
+    - key: Name
+      value: "database-subnet-1b"
+    - key: Project
+      value: "wblio-lab"
+    - key: Region
+      value: "us-east-1"
+---
+apiVersion: ec2.aws.crossplane.io/v1beta1
+kind: Subnet
+metadata:
+  name: database-subnet-1c
+spec:
+  forProvider:
+    vpcId: main-vpc
+    cidrBlock: "10.0.53.0/24"
+    availabilityZone: "us-east-1c"
+  providerConfigRef:
+    name: default
+  tags:
+    - key: Name
+      value: "database-subnet-1c"
+    - key: Project
+      value: "wblio-lab"
+    - key: Region
+      value: "us-east-1"
